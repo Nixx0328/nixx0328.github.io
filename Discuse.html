@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>论坛网页</title>
+  <style>
+    body {
+      background-image: url("https://imgs.699pic.com/images/328/459/872.jpg!list2x.v1");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    #loginForm,
+    #registerForm {
+      display: none;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(to bottom right, #00bfff 20%, #ff00d4 80%);
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #78f2d4;
+    }
+
+    .post {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .post .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .post .author {
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .post .content {
+      margin-bottom: 10px;
+    }
+
+    .post .date {
+      color: #888;
+      font-size: 12px;
+    }
+
+    #post-form {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="background-color:#ff8c00eb;font-size:xx-large;" translate="no">
+    <img src="Image/LOGO.png" align="left" alt="Logo" width=180 height=97>
+    Nixx的小站 Nixx's Mini Website
+    <b>
+      <i>
+        <ins style="font-size: small;">我编故我在。————小站首语</ins style>
+      </i>
+    </b>
+    <table border="2" style="background-color: aliceblue;">
+      <tbody>
+        <tr>
+          <td>
+            <a style="background-color:#00ffee;color:rgb(224, 62, 62);font-size:large;" href="index.html" target="_self"
+              translate="no">
+              首页|Home
+            </a>
+          </td>
+          <td>
+            <a style="background-color:#ffff00;color:rgb(6, 25, 171);font-size:large;" href="Introduction.html"
+              target="_self" translate="no">
+              简介|Introduction
+            </a>
+          </td>
+          <td>
+            <a style="background-color:#ff9100dd;color:rgb(90, 2, 254);font-size:large;" href="Community.html"
+              target="_self" translate="no">
+              社区|Community
+            </a>
+          </td>
+          <td>
+            <a style="background-color:#00ff22;color:rgb(245, 39, 101);font-size:large;" href="Mine.html" target="_self"
+              translate="no">
+              我的|Mine
+            </a>
+          </td>
+          <td>
+            <a style="background-color:#ff002f;color:rgb(82, 215, 255);font-size:large;" href="Feedback.html"
+              target="_self" translate="no">
+              反馈|Feedback
+            </a>
+          </td>
+          <td>
+            <a style="background-color:#2200ff;color:white;font-size:large;" href="Login.html" target="_self"
+              translate="no">
+              登陆/注册|Login/Register
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+        <col>
+      </colgroup>
+    </table style>
+  </h1 style>
+  <div class="container">
+    <h1>论坛网页</h1>
+    <!-- 登录/注册按钮 -->
+    <div id="unlogined">
+      <button onclick="showLoginForm()">登录/注册</button>
+    </div>
+    <!-- 登录表单 -->
+    <div id='login-form'>
+      <h2>登录</h2>
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" placeholder="输入用户名">
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" placeholder="输入密码">
+      </div>
+      <button class="btn" onclick="login()">登录</button>
+      <div>
+        <button onclick="showRegisterForm();hideLoginForm()" style="
+                        background-color: #fafa03;display: inline-block;
+                        padding: 10px 20px;
+                        color: #fff;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        border: none;
+                        cursor: pointer;
+        ">
+          没有账号？注册一个
+        </button>
+      </div>
+    </div>
+
+    <!-- 注册表单 -->
+    <div id='register-form'>
+      <h2>注册</h2>
+      <div class="form-group">
+        <label for="new-username">用户名</label>
+        <input type="text" id="new-username" name="new-username" placeholder="选择用户名">
+      </div>
+      <div class="form-group">
+        <label for="new-password">密码</label>
+        <input type="password" id="new-password" name="new-password" placeholder="选择密码">
+      </div>
+      <button class="btn" onclick="register()">注册</button>
+    </div>
+
+    <!-- 发帖表单 -->
+    <div id="post-form">
+      <h2>发表帖子</h2>
+      <div class="form-group">
+        <label for="post-title">标题</label>
+        <input type="text" id="post-title" name="post-title" placeholder="输入帖子标题">
+      </div>
+      <div style="color:#ff0000;" id="Error-Title-type">标题不可为空！</div>
+      <div class="form-group">
+        <label for="post-content">内容</label>
+        <textarea id="post-content" name="post-content" rows="5" placeholder="输入帖子内容"></textarea>
+        <div style="color:#ff0000;" id="Error-content-type">内容不可为空！</div>
+      </div>
+      <button class="btn" onclick="createPost()">发表帖子</button>
+    </div>
+
+    <!-- 帖子列表 -->
+    <div id="posts">Please Login first!</div>
+  </div>
+
+  <script>
+    hideLoginForm();
+    hideRegisterForm();
+    document.getElementById('post-form').style.display = 'block';
+    document.getElementById('Error-Title-type').style.display = 'none';
+    document.getElementById('Error-content-type').style.display = 'none';
+    let currentUser = null;
+    let posts = [];
+    const usersList = [
+      { username: 'Admin', password: 'moc.361@307205iN' },
+      { username: 'Nixx0328', password: 'ni20110328' }
+    ];
+
+    // 登录按钮点击事件
+    function showLoginForm() {
+      document.getElementById('login-form').style.display = 'block';
+    }
+
+    function hideLoginForm() {
+      document.getElementById('login-form').style.display = 'none';
+    }
+
+    // 注册按钮点击事件
+    function showRegisterForm() {
+      document.getElementById('register-form').style.display = 'block';
+    }
+
+    function hideRegisterForm() {
+      document.getElementById('register-form').style.display = 'none';
+    }
+
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // 模拟从本地文件中读取用户数据
+
+
+      const user = usersList.find(user => user.username === username && user.password === password);
+
+      if (user) {
+        currentUser = username;
+        showPostForm();
+        loadPosts();
+        hideLoginForm();
+        hideRegisterForm();
+        alert('登录成功');
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('unlogined').style.display = 'none';
+      } else {
+        alert('用户名或密码不正确');
+      }
+    }
+
+    function register() {
+      const newUsername = document.getElementById('new-username').value;
+      const newPassword = document.getElementById('new-password').value;
+
+      // 模拟将用户数据保存到本地文件
+      const user = { username: newUsername, password: newPassword };
+      // 假设已经有了一个名为 "Users.list" 的本地文件保存用户数据
+      // 这里使用简单的模拟方式，实际应用中应该使用服务器端的数据库来保存用户数据
+      usersList.push(user);
+
+      // 清空注册表单
+      document.getElementById('new-username').value = '';
+      document.getElementById('new-password').value = '';
+      showLoginForm();
+      hideRegisterForm();
+      alert('注册成功，请使用新账号登录');
+    }
+
+    function showPostForm() {
+      document.getElementById('post-form').style.display = 'block';
+    }
+
+    function createPost() {
+      if(currentUser===null)
+      {
+        alert('请先登录。登陆后即可发表您的精彩言论');
+        // 清空发帖表单
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+      }
+      else{
+        const postTitle = document.getElementById('post-title').value;
+        const postContent = document.getElementById('post-content').value;
+        if(postTitle===''||postContent==''||postTitle===' '||postContent==' ')
+        {
+          document.getElementById('Error-Title-type').style.display = 'block';
+          document.getElementById('Error-content-type').style.display = 'block';
+        }
+        else{
+          document.getElementById('Error-Title-type').style.display = 'none';
+          document.getElementById('Error-content-type').style.display = 'none';
+          
+          const post = {
+          title: postTitle,
+          content: postContent,
+          author: currentUser,
+          date: new Date().toLocaleString()
+        };
+        posts.push(post);
+        renderPosts();
+        // 清空发帖表单
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+        }
+      }
+      
+    }
+
+    function loadPosts() {
+      // 模拟从本地文件中读取帖子列表
+      const savedPosts = [
+        { title: '帖子1', content: '这是帖子1的内容', author: 'user1', date: '2024/05/26 10:00:00' },
+        { title: '帖子2', content: '这是帖子2的内容', author: 'user2', date: '2024/05/26 11:00:00' }
+      ];
+
+      posts = savedPosts;
+      renderPosts();
+    }
+
+    function renderPosts() {
+      const postsContainer = document.getElementById('posts');
+      postsContainer.innerHTML = '';
+
+      posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+
+        const titleElement = document.createElement('div');
+        titleElement.className = 'title';
+        titleElement.textContent = post.title;
+        postElement.appendChild(titleElement);
+
+        const authorElement = document.createElement('div');
+        authorElement.className = 'author';
+        authorElement.textContent = '作者: ' + post.author;
+        postElement.appendChild(authorElement);
+
+        const contentElement = document.createElement('div');
+        contentElement.className = 'content';
+        contentElement.textContent = post.content;
+        postElement.appendChild(contentElement);
+
+        const dateElement = document.createElement('div');
+        dateElement.className = 'date';
+        dateElement.textContent = '发布日期: ' + post.date;
+        postElement.appendChild(dateElement);
+
+        postsContainer.appendChild(postElement);
+      });
+    }
+  </script>
+</body>
+
+</html>
